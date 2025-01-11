@@ -1,0 +1,16 @@
+[project]
+name = "scorpius"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "blobfile>=3.0.0",
+    "jax>=0.4.38",
+    "load-dotenv>=0.1.0",
+    "pathlib>=1.0.1",
+    "tiktoken>=0.8.0",
+    "torch>=2.5.1",
+    "transformers>=4.48.0",
+    "tyro>=0.9.8",
+]
