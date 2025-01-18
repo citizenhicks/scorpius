@@ -75,3 +75,44 @@ def get_model_params(config: ModelConfig) -> ModelParams:
         rope_theta=config.rope_theta,
         use_scaled_rope=config.use_scaled_rope
     )
+
+class SamplerConfig:
+    def __init__(self, model_size: str = "1B"):
+        """
+        Initialize SamplerConfig with specified model size.
+
+        Args:
+            model_size: One of "1B", or "3B"
+        """
+        self.model_size = model_size  # Store model_size as instance variable
+
+        if self.model_size == "1B":
+            """
+            Configuration for the sampling strategy, including threshold values for various metrics
+            and adaptive sampling parameters.
+            """
+            self.temperature = 0.666
+            self.top_p = 0.90
+            self.top_k = 27
+            self.min_p = 0.03
+
+            self.high_logits_entropy_threshold = 2.1
+            self.low_logits_varentropy_threshold = 0.05
+            self.low_attention_entropy_threshold = 11.915
+            self.low_attention_varentropy_threshold = 0.001
+
+        elif self.model_size == "3B":
+            
+            self.temperature = 0.666
+            self.top_p = 0.90
+            self.top_k = 27
+            self.min_p = 0.03
+
+            self.high_logits_entropy_threshold = 2.1
+            self.low_logits_varentropy_threshold = 0.05
+            self.low_attention_entropy_threshold = 11.915
+            self.low_attention_varentropy_threshold = 0.001
+            self.adaptive_score_interaction_strength_coefficient = 0.6
+
+        else:
+            raise ValueError(f"Invalid model size: {model_size}. Choose from: 1B, 3B")

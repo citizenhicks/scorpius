@@ -47,16 +47,16 @@ class Model(nn.Module):
         self.tokeniser=tokeniser
 
     
-    def getModelId():
+    def getModelId(self):
         return self.model_id
     
-    def getParams():
+    def getParams(self):
         return self.params
 
-    def getDevice():
+    def getDevice(self):
         return self.device
 
-    def getKVCache():
+    def getKVCache(self):
         return self.kvcache
 
     def tokenize(self, prompt: str, chat_template: bool = False) -> torch.Tensor:
@@ -69,8 +69,8 @@ class Model(nn.Module):
         ]
         if chat_template:
             prompt = self._generate_chat_prompt(messages)
-        tokens = self.tokeniser.encode(prompt, bos=False, eos=False, allowed_special="all")
-        return torch.tensor([tokens], dtype=torch.long).to(self.device)
+        tokens = self.tokeniser.encode(prompt, bos=True, eos=False, allowed_special="all")
+        return torch.tensor([tokens], dtype=torch.int32).to(self.device)
 
     def detokenize(self, next_token) -> torch.Tensor:
         return self.tokeniser.decode([next_token.item()])
